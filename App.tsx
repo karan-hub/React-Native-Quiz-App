@@ -1,14 +1,29 @@
-import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import React, { Component, useState } from 'react';
+import { View, Text, StyleSheet, FlatList } from 'react-native';
+import data from './src/quizData';
+import Question from './src/QuestionItem';
+function App() {
 
-export class App extends Component {
-  render() {
-    return (
-      <View style={{ backgroundColor: 'black', flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <Text style={{ color: 'white', fontSize: 24 }}>karan</Text>
+  const [currentIndex, setCurrentIndex] = useState(1);
+
+  return (
+    <View style={{ flex: 1  }}>
+      <Text style={{ marginTop:20,   marginHorizontal:10, fontSize: 24  }}> {` Question : ${currentIndex} / ${data.length}`} </Text>
+
+      <View style={{ marginTop: 14,  flex: 1  }}>
+        <FlatList data={data} horizontal renderItem={({ item, index }) => { return (<Question data={item} />) }} />
       </View>
-    );
-  }
+    </View>
+  );
 }
 
+
 export default App;
+
+
+const style = StyleSheet.create({
+  border: {
+    borderColor: "black",
+    borderWidth: 2,
+  }
+})
